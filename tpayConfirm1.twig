@@ -1,0 +1,27 @@
+
+{{ header }}
+
+<div id="common-home" class="container">
+<h1> Ďakujeme za nákup </h1>
+<h4>{{ paymentMessage }}</a></h4>
+                <p>{{ paymentMessage }}</p>
+                <p>{{ "stranka bude po X sekundach presmerovna na homepage" }}</p>
+
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+   
+    <div id="content" class="{{ class }}">{{ content_top }}{{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+
+<!-- A meta tag that redirects after X seconds -->
+<!--
+<meta http-equiv="refresh" content="10;url=http://localhost/opencart-3.0.3.3/upload/index.php?route=common/home">   -->
+
+{{ footer }}
