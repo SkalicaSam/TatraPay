@@ -1,37 +1,28 @@
 <?php
-class ModelExtensionPaymentTpay extends Model {
-	public function getMethod($address, $total) {
-		$this->load->language('extension/payment/tpay');
+// Heading
+$_['heading_title']      = 'T-pay';
 
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('payment_cod_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
+// Text
+$_['text_extension']     = 'Extensions';
+$_['text_success']       = 'Success: You have modified T-pay Delivery payment module!';
+$_['text_edit']          = 'Edit T-pay Delivery';
 
-		if ($this->config->get('payment_tpay_total') > 0 && $this->config->get('payment_tpay_total') > $total) {
-			$status = false;
-		} elseif (!$this->cart->hasShipping()) {
-			$status = false;
-		} elseif (!$this->config->get('payment_tpay_geo_zone_id')) {
-			$status = true;
-		} elseif ($query->num_rows) {
-			$status = true;
-		} else {
-			$status = false;
-		}
+// Entry
+$_['entry_total']        = 'Total';
+$_['entry_MID']        = 'MID';
+$_['entry_SECURITY_KEY']        = 'Security key given from bank';
+$_['entry_order_status'] = 'Order Status';
+$_['entry_geo_zone']     = 'Geo Zone';
+$_['entry_status']       = 'Status';
+$_['entry_sort_order']   = 'Sort Order';
 
-		$method_data = array();
+// Help
+$_['help_total']         = 'The checkout total the order must reach before this payment method becomes active.';
 
-		if ($status) {
-			$method_data = array(
-				'code'       => 'tpay',
-				'title'      => $this->language->get('text_title'),
-				'terms'      => '',
-				'sort_order' => $this->config->get('payment_tpay_sort_order')
-			);
-		}
+$_['help_MID']         = 'The identificator of bussinesman e.g.;9999';
 
-		print_r($method_data);
-		print_r($query);
-		echo "<pre>";
-		print_r("in tpay model");
-		return $method_data;
-	}
-}
+$_['help_SECURITY_KEY']         = 'Security key given from bank  e.g.;31323334353637383930313233343536373839303132333435363738393031323132333435363738393031323334353637383930313233343536373839303132';
+
+
+// Error
+$_['error_permission']   = 'Warning: You do not have permission to modify payment T-pay Delivery!';
