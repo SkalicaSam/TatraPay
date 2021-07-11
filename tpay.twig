@@ -1,0 +1,44 @@
+
+
+
+
+<form id="tatrapaysubmit" name="tatrapaysubmit" action="https://moja.tatrabanka.sk/cgi-bin/e-commerce/start/tatrapay" method="POST">
+	{% for key, value in $inputParrams %}
+        <input type="hidden" name="{{ key }}" value="{{ value }}"/>
+    {% endfor %}
+  <input type="submit" value="Vykonať platbu" />
+</form>
+
+<div class="buttons">
+  <div class="pull-right">
+    <input type="button" value="{{ button_confirm }}" id="button-confirm" class="btn btn-primary" data-loading-text="{{ text_loading }}" />
+  </div>
+</div>
+<script type="text/javascript"><!--
+    $('#button-confirm').bind('click', function() {
+        $('#tatrapaysubmit').submit();
+    });
+//--></script>
+
+
+<script type="text/javascript"><!--
+$('#button-confirm').on('click', function() {
+	$.ajax({
+		type: 'get',
+		url: 'index.php?route=product/product&path=25&product_id=51',
+		cache: false,
+		beforeSend: function() {
+			$('#button-confirm').button('loading');
+		},
+		complete: function() {
+			$('#button-confirm').button('reset');
+		},
+		success: function() {
+			location = 'index.php?route=product/product&path=25&product_id=51';
+		}
+
+		
+	});
+});
+//--></script>
+
